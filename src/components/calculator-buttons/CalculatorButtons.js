@@ -7,6 +7,7 @@ class CalculatorButtons extends Component {
   renderButton(i) {
     return (
       <CalculatorButton 
+        key={i}
         symbol={i} 
         onClick={() => this.props.onClick(i)}
       />
