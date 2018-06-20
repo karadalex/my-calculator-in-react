@@ -27,20 +27,28 @@ class Calculator extends Component {
   calculate(num) {
     var op = this.state.latestOperator;
     var prev = this.state.result;
+    var res;
     switch (op) {
       case "+":
-        return prev + num;
+        res = prev + num;
+        break;
       case "-":
-        return prev - num;
+        res = prev - num;
+        break;
       case "x":
-        return prev * num;
+        res = prev * num;
+        break;
       case "/":
         if (num != 0) {
-          return prev / num;
-        } else {
-          return NaN;
+          res = prev / num;
         }
+        break;
+      default:
+        res = num;
+        break;
     }
+    this.setState({latestOperator: ""});
+    return res;
   }
 
   render() {
