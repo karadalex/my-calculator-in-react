@@ -20,23 +20,7 @@ class Calculator extends Component {
   handleButtonClick(x) {
     switch (this.state.fsmState) {
       case 1:
-        if (Number.isInteger(x)) {
-          this.taskFSMState2(x);
-        } else if (x !== "=") {
-            this.taskFSMState3(x);
-        } else {
-          this.taskFSMState4();
-        }
-        break;
       case 2:
-        if (Number.isInteger(x)) {
-          this.taskFSMState2(x);
-        } else if (x !== "=") {
-            this.taskFSMState3(x);
-        } else {
-          this.taskFSMState4();
-        }
-        break;
       case 3:
         if (Number.isInteger(x)) {
           this.taskFSMState2(x);
