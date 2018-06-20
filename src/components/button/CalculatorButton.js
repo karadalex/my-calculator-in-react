@@ -4,9 +4,9 @@ import './CalculatorButton.css';
 class CalculatorButton extends Component {
   render() {
     return (
-        <div className="CalculatorButton">
-            
-        </div>
+        <button className="CalculatorButton">
+          {this.props.symbol}
+        </button>
     );
   }
 }
