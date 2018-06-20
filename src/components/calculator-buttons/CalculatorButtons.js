@@ -21,7 +21,7 @@ class CalculatorButtons extends Component {
   render() {
     return (
         <div className="CalculatorButtonsContainer">
-          <Grid container spacing={30}>
+          <Grid container justify="space-between">
             <Grid container xs={8} spacing={24}>
               {
                 nums.map(i => {
@@ -29,7 +29,7 @@ class CalculatorButtons extends Component {
                 })
               }
             </Grid>
-            <Grid container xs={4} spacing={24}>
+            <Grid container xs={3}>
               {
                 operators.map(i => {
                   return this.renderButton(i, 12);
