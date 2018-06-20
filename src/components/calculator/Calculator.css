@@ -3,3 +3,15 @@
     width: 50%;
     background-color: darkturquoise;
 }
+
+@media (max-width: 800px) {
+    .CalculatorBody {
+        width: 80%;
+    }
+}
+
+@media (max-width: 500px) {
+    .CalculatorBody {
+        width: 100%;
+    }
+}
