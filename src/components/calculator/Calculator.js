@@ -25,7 +25,7 @@ class Calculator extends Component {
         } else if (x !== "=") {
             this.taskFSMState3(x);
         } else {
-          this.taskFSMState1();
+          this.taskFSMState4();
         }
         break;
       case 2:
@@ -34,7 +34,7 @@ class Calculator extends Component {
         } else if (x !== "=") {
             this.taskFSMState3(x);
         } else {
-          this.taskFSMState1();
+          this.taskFSMState4();
         }
         break;
       case 3:
@@ -43,27 +43,26 @@ class Calculator extends Component {
         } else if (x !== "=") {
             this.taskFSMState3(x);
         } else {
-          this.taskFSMState1();
+          this.taskFSMState4();
         }
         break;
-      // case 4:
-      //   if (Number.isInteger(x)) {
-      //     this.taskFSMState1();
-      //   } else if (x !== "=") {
-      //       this.taskFSMState3(x);
-      //   } else {
-      //     this.taskFSMState4();
-      //   }
-      //   break;
+      case 4:
+        if (Number.isInteger(x)) {
+          this.taskFSMState1(x);
+        } else if (x !== "=") {
+            this.taskFSMState3(x);
+        } else {
+          this.taskFSMState4();
+        }
+        break;
     }
   }
 
-  taskFSMState1() {
-    var res = this.calculate();
+  taskFSMState1(firstNum) {
     this.setState({
       a: 0,
-      b: res,
-      result: res,
+      b: firstNum,
+      result: firstNum,
       fsmState: 1
     });
   }
@@ -93,7 +92,13 @@ class Calculator extends Component {
   }
 
   taskFSMState4() {
-    
+    var res = this.calculate();
+    this.setState({
+      a: 0,
+      b: res,
+      result: res,
+      fsmState: 4
+    });
   }
 
   calculate() {
