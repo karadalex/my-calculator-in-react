@@ -9,24 +9,97 @@ class Calculator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      buttonClicked: 0,
-      result: 0,
-      latestOperator: ""
+      fsmState: 1,
+      a: 0,
+      b: 0,
+      operator: "",
+      result: 0
     }
   }
 
   handleButtonClick(x) {
-    if (Number.isInteger(x)) {
-      var newResult = this.calculate(x)
-      this.setState({result: newResult});
-    } else {
-        this.setState({latestOperator: x});
+    switch (this.state.fsmState) {
+      case 1:
+        if (Number.isInteger(x)) {
+          this.taskFSMState2(x);
+        } else if (x !== "=") {
+            this.taskFSMState3(x);
+        } else {
+          this.taskFSMState1();
+        }
+        break;
+      case 2:
+        if (Number.isInteger(x)) {
+          this.taskFSMState2(x);
+        } else if (x !== "=") {
+            this.taskFSMState3(x);
+        } else {
+          this.taskFSMState1();
+        }
+        break;
+      case 3:
+        if (Number.isInteger(x)) {
+          this.taskFSMState2(x);
+        } else if (x !== "=") {
+            this.taskFSMState3(x);
+        } else {
+          this.taskFSMState1();
+        }
+        break;
+      // case 4:
+      //   if (Number.isInteger(x)) {
+      //     this.taskFSMState1();
+      //   } else if (x !== "=") {
+      //       this.taskFSMState3(x);
+      //   } else {
+      //     this.taskFSMState4();
+      //   }
+      //   break;
     }
   }
 
-  calculate(num) {
-    var op = this.state.latestOperator;
-    var prev = this.state.result;
+  taskFSMState1() {
+    var res = this.calculate();
+    this.setState({
+      a: 0,
+      b: res,
+      result: res,
+      fsmState: 1
+    });
+  }
+
+  taskFSMState2(num) {
+    var B = this.state.b.toString();
+    if (B == "0") {
+      B = num;
+    } else {
+      B = eval(B.toString()+num.toString());
+    }
+    this.setState({
+      b: B,
+      result: B,
+      fsmState: 2
+    });
+  }
+
+  taskFSMState3(op) {
+    var B = this.state.b;
+    this.setState({
+      a: B,
+      b: 0,
+      operator: op,
+      fsmState: 3
+    });
+  }
+
+  taskFSMState4() {
+    
+  }
+
+  calculate() {
+    var op = this.state.operator;
+    var prev = this.state.a;
+    var num = this.state.b;
     var res;
     switch (op) {
       case "+":
@@ -39,15 +112,11 @@ class Calculator extends Component {
         res = prev * num;
         break;
       case "/":
-        if (num != 0) {
+        if (num !== 0) {
           res = prev / num;
         }
         break;
-      default:
-        res = num;
-        break;
     }
-    this.setState({latestOperator: ""});
     return res;
   }
 
