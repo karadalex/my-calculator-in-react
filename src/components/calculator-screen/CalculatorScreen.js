@@ -5,7 +5,7 @@ class CalculatorScreen extends Component {
   render() {
     return (
         <div className="CalculatorScreenContainer">
-            <p className="CalculatorResult"> Result </p>
+            <p className="CalculatorResult"> {this.props.result} </p>
         </div>
     );
   }

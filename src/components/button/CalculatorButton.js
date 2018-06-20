@@ -4,7 +4,7 @@ import './CalculatorButton.css';
 class CalculatorButton extends Component {
   render() {
     return (
-        <button className="CalculatorButton">
+        <button className="CalculatorButton" onClick={() => this.props.onClick()}>
           {this.props.symbol}
         </button>
     );
