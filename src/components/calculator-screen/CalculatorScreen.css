@@ -1,0 +1,16 @@
+.CalculatorScreenContainer {
+    margin: 50px auto;
+    width: 90%;
+    height: 80px;
+    background-color: white;
+    border-width: 3px;
+    border-color: teal;
+    border-style: solid;
+}
+
+.CalculatorResult {
+    margin: 0 auto;
+    text-align: right;
+    padding: 10px;
+    font-size: 3.5em;
+}
