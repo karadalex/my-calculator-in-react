@@ -11,7 +11,7 @@ class Calculator extends Component {
     this.state = {
       fsmState: 1,
       a: 0,
-      b: 0,
+      b: "0",  // better manipulation of number in typing, if string
       operator: "",
       result: 0
     }
@@ -22,7 +22,7 @@ class Calculator extends Component {
       case 1:
       case 2:
       case 3:
-        if (Number.isInteger(x)) {
+        if (Number.isInteger(x) || x == ".") {
           this.taskFSMState2(x);
         } else if (x !== "=") {
             this.taskFSMState3(x);
@@ -31,7 +31,7 @@ class Calculator extends Component {
         }
         break;
       case 4:
-        if (Number.isInteger(x)) {
+        if (Number.isInteger(x) || x == ".") {
           this.taskFSMState1(x);
         } else if (x !== "=") {
             this.taskFSMState3(x);
@@ -52,11 +52,15 @@ class Calculator extends Component {
   }
 
   taskFSMState2(num) {
-    var B = this.state.b.toString();
-    if (B == "0") {
-      B = num;
+    var B = this.state.b;
+    if (num == ".") {
+      B += num.toString();
     } else {
-      B = eval(B.toString()+num.toString());
+      if (B == "0") {
+        B = num.toString();
+      } else {
+        B += num.toString();
+      }
     }
     this.setState({
       b: B,
@@ -87,8 +91,8 @@ class Calculator extends Component {
 
   calculate() {
     var op = this.state.operator;
-    var prev = this.state.a;
-    var num = this.state.b;
+    var prev = eval(this.state.a);
+    var num = eval(this.state.b);
     var res;
     switch (op) {
       case "+":
